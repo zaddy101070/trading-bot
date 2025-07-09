@@ -110,7 +110,7 @@ int PositionsTotalByMagic()
    int total=0;
    for(int i=PositionsTotal()-1;i>=0;i--)
      {
-      if(PositionGetTicket(i))
+      if(PositionSelectByIndex(i))
         {
          if((ulong)PositionGetInteger(POSITION_MAGIC)==MagicNumber &&
             PositionGetString(POSITION_SYMBOL)==_Symbol)
@@ -127,7 +127,7 @@ double CalculateLots(double slPoints)
   {
    if(slPoints<=0) return(0.0);
    double risk = Risk_Percent/100.0;
-   double tickValue=MarketInfo(_Symbol,MODE_TICKVALUE);
+   double tickValue=SymbolInfoDouble(_Symbol,SYMBOL_TRADE_TICK_VALUE);
    double contractSize=SymbolInfoDouble(_Symbol,SYMBOL_TRADE_CONTRACT_SIZE);
    double slPriceDist=slPoints*_Point;
    double moneyRisk = AccountFreeMargin()*risk;
